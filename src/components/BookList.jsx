@@ -7,6 +7,7 @@ const BookList = () => {
   const dispatch = useDispatch();
 
   const books = useSelector((state) => state.books);
+  const notifications = useSelector((state) => state.notifications);
 
   const handleFetchBooks = () => {
     dispatch(fetchBooks({ query: "GOVNO" }));
@@ -22,6 +23,11 @@ const BookList = () => {
       <button type="button" onClick={handleFetchBooks}>
         Fetch books
       </button>
+      <ul>
+        {notifications.map((v) => (
+          <li key={v.id}>{v.message}</li>
+        ))}
+      </ul>
     </div>
   );
 };

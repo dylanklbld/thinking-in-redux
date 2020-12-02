@@ -1,16 +1,24 @@
 import { applyMiddleware, compose, createStore } from "redux";
 import rootReducer, { initialState } from "./reducers/rootReducer";
 
+import actionSplitterMiddleware from "./middlewares/actionSplitter";
 import apiMiddleware from "./middlewares/api";
 import booksMiddleware from "./middlewares/books";
 import logger from "redux-logger";
+import normalizationMiddleware from "./middlewares/normalization";
+import notificationMiddleware from "./middlewares/ui";
 import thunkMiddleware from "redux-thunk";
 
 //createthefeaturemiddlewarearray
 const featureMiddleware = [booksMiddleware];
 
 //createthecoremiddlewarearray
-const coreMiddleware = [apiMiddleware];
+const coreMiddleware = [
+  actionSplitterMiddleware,
+  apiMiddleware,
+  normalizationMiddleware,
+  notificationMiddleware,
+];
 
 const middlewares = [
   thunkMiddleware,
